@@ -1,0 +1,35 @@
+name: CI — Flutter tests & coverage to Qlty
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests & generate coverage
+        run: flutter test --coverage
+
+      - name: Upload coverage to Qlty
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          coverage-path: coverage/lcov.info
+        env:
+          # Add QLTY_TOKEN in GitHub repo → Settings → Secrets and variables → Actions → New repository secret
+          QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
