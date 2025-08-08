@@ -1,4 +1,4 @@
-name: CI — Flutter tests & coverage to Qlty
+name: CI - Flutter tests & coverage to Qlty
 
 on:
   push:
