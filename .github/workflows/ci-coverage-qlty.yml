@@ -31,5 +31,4 @@ jobs:
         with:
           coverage-path: coverage/lcov.info
         env:
-          # Add QLTY_TOKEN in GitHub repo → Settings → Secrets and variables → Actions → New repository secret
           QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
