@@ -21,7 +21,19 @@ void main() {
     final val3 = find.text('You have pushed the button this many times:');
     expect(val3, findsOneWidget);
 
-    final floatingAction = find.byType(FloatingActionButton);
+    // final floatingAction = find.byType(FloatingActionButton);
+    // expect(floatingAction, findsOneWidget);
+
+    final floatingAction = find.byKey(const Key('floating_btn'));
     expect(floatingAction, findsOneWidget);
+    await tester.tap(floatingAction);
+
+    await tester.pump(); // For rebuilding app
+
+    final val4 = find.text('1');
+    expect(val4, findsOneWidget);
+
+    final appBar = find.byType(AppBar);
+    expect(appBar, findsOneWidget);
   });
 }
